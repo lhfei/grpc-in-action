@@ -1,0 +1,15 @@
+**/*iml*
+*idea*
+*.class
+**/target/**
+.metadata/
+.recommenders/
+.classpath
+.project
+.springBeans
+.settings/
+.gradle
+gradle-app.setting
+target/
+build/
+bin/

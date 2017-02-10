@@ -17,6 +17,8 @@ buildscript {
     }
 }
 
+version = '0.1.0'
+
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'application'
@@ -62,6 +64,49 @@ dependencies {
 }
 
 
+startScripts.enabled = false
+
+
+eclipse {
+  classpath {
+    file {
+	  withXml {
+		def node = it.asNode()
+		node.appendNode('classpathentry', [kind: 'src', path: "build/generated/source/proto/main/grpc"])
+		node.appendNode('classpathentry', [kind: 'src', path: "build/generated/source/proto/main/java"])
+	  }
+    
+      //closure executed after .classpath content is loaded from existing file
+      //but before gradle build information is merged
+      //beforeMerged { classpath ->
+		//sourceDirs += file("${projectDir}/build/generated/source/proto/main/java");
+        //sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc");
+      //}
+
+      //closure executed after .classpath content is loaded from existing file
+      //and after gradle build information is merged
+      //whenMerged { classpath ->
+      	//def rpcSrc = new org.gradle.plugins.ide.eclipse.model.SourceFolder("${projectDir}/build/generated/source/proto/main/grpc", null)
+		//def genSrc = new org.gradle.plugins.ide.eclipse.model.SourceFolder("${projectDir}/build/generated/source/proto/main/java", null)
+		//classpath.entries.add(rpcSrc)
+		//classpath.entries.add(genSrc)
+      //}
+    }
+  }
+}
+
+idea {
+    module {
+        // Not using generatedSourceDirs because of
+        // https://discuss.gradle.org/t/support-for-intellij-2016/15294/8
+        sourceDirs += file("${projectDir}/build/generated/source/proto/main/java");
+        sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc");
+        //generatedSourceDirs += file("${projectDir}/build/generated/source/proto/main/java");
+        //generatedSourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc");
+    }
+}
+
+
 protobuf {
   protoc {
     // The version of protoc must match protobuf-java. If you don't depend on
@@ -84,10 +129,6 @@ protobuf {
     }
   }
 }
-
-
-
-startScripts.enabled = false
 
 task createDocs {
     def docs = file("$buildDir/docs")

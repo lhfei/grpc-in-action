@@ -44,7 +44,7 @@ def slf4jVersion = '1.7.22'
 def logbackVersion = '1.1.9'
 dependencies {
     // The production code uses Guava
-    compile 'com.google.guava:guava:20.0'
+    compile 'com.google.guava:guava:22.0'
     
     compile group: 'io.grpc', name: 'grpc-protobuf', version: "${grpcVersion}"
 	compile group: 'io.grpc', name: 'grpc-netty', version: "${grpcVersion}"
@@ -156,3 +156,33 @@ distributions {
     }
 }
 
+// Hello World!
+task helloworldserver(type: JavaExec) {
+	classpath = sourceSets.main.runtimeClasspath
+	main = 'cn.lhfei.grpc.helloworld.HelloWorldServer'
+}
+
+task helloworld(dependsOn: helloworldserver, type: JavaExec) {
+	classpath sourceSets.main.runtimeClasspath
+	main = 'cn.lhfei.grpc.helloworld.HelloWorldClient'
+}
+
+task HelloWorldClient(type : CreateStartScripts) {
+    mainClassName = 'cn.lhfei.grpc.helloworld.HelloWorldClient'
+    applicationName = 'HelloWorld-client'
+    outputDir = new File(project.buildDir, 'tmp')
+    classpath = jar.outputs.files + project.configurations.runtime
+}
+
+task HelloWorldServer(type : CreateStartScripts) {
+    mainClassName = 'cn.lhfei.grpc.helloworld.HelloWorldServer'
+    applicationName = 'HelloWorld-server'
+    outputDir = new File(project.buildDir, 'tmp')
+    classpath = jar.outputs.files + project.configurations.runtime
+}
+
+applicationDistribution.into('bin') {
+    from(HelloWorldServer)
+    from(HelloWorldClient)
+    fileMode = 0755
+}

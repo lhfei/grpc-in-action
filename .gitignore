@@ -1,15 +1,33 @@
-**/*iml*
-*idea*
-*.class
-**/target/**
-.metadata/
-.recommenders/
-.classpath
-.project
-.springBeans
-.settings/
-.gradle
-gradle-app.setting
+# maven ignore
 target/
-build/
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+.springBeans
 bin/
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+tmp/
+
+# system ignore
+.DS_Store
+Thumbs.db
+/.gradle/

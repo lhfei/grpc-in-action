@@ -46,7 +46,7 @@ public class HelloWorldClient {
 				// Channels are secure by default (via SSL/TLS). For the example
 				// we disable TLS to avoid
 				// needing certificates.
-				.usePlaintext(true).build();
+				.usePlaintext().build();
 		blockingStub = GreeterGrpc.newBlockingStub(channel);
 	}
 

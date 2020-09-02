@@ -20,7 +20,7 @@
 	<appender name="file" class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="1024000KB"/>
 		<param name="maxBackupIndex" value="5" />
-		<param name="File" value="${catalina.base}/logs/grpc-in-action-debug.log" />
+		<param name="File" value="logs/grpc-in-action-debug.log" />
 		<param name="threshold" value="debug" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
@@ -29,7 +29,7 @@
 	<appender name="debugfile" class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="1024000KB"/>
 		<param name="maxBackupIndex" value="5" />
-		<param name="File" value="${catalina.base}/logs/grpc-in-action-error.log" />
+		<param name="File" value="logs/grpc-in-action-error.log" />
 		<param name="threshold" value="error" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />

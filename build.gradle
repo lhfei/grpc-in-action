@@ -22,11 +22,13 @@ repositories {
 }
 
 // properties
-def grpcVersion = '1.27.2'
-def protobufVersion = '3.11.0'
+def grpcVersion = '1.30.2'
+def protobufVersion = '3.13.0'
 def protocVersion = protobufVersion
 def slf4jVersion = '1.7.30'
 def logbackVersion = '1.2.3'
+def commonMath3Version = '3.6.1'
+def guavaVersion = '28.2-jre'
 
 dependencies {
 	compile group: 'io.grpc', name: 'grpc-protobuf', version: "${grpcVersion}"
@@ -42,13 +44,13 @@ dependencies {
 	compile group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
 	
     // This dependency is exported to consumers, that is to say found on their compile classpath.
-    compile 'org.apache.commons:commons-math3:3.6.1'
+    compile "org.apache.commons:commons-math3:${commonMath3Version}"
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    compile 'com.google.guava:guava:28.2-jre'
+    compile "com.google.guava:guava:${guavaVersion}"
 
     // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:4.12"
 }
 
 protobuf {

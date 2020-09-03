@@ -41,13 +41,14 @@ dependencies {
     compile group: "com.google.code.gson", name: "gson", version: "${gsonVersion}"
 	
 	// Slf4j dependencies
-	compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
-//	compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+	compile("ch.qos.logback:logback-classic:${logbackVersion}") {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
 	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: "${slf4jVersion}"
-	
-	compile group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
-	compile group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
-	
+	compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+
+	compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
+
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     compile "org.apache.commons:commons-math3:${commonMath3Version}"
 
